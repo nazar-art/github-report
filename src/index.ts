@@ -12,13 +12,13 @@ if (process.argv.length < 3) {
 } else {
 
     let userName: string = process.argv[2];
-    console.log('info for github user: ' + userName);
+    console.log('TOP 5 projects for GitHub user: ' + userName);
 
     apiService.getUserInfo(userName, (user: User) => {
         apiService.getRepos(userName, (repos:  Repo[]) => {
             // sort by forks
             let sortedRepos = _.sortBy(repos, [(repo: Repo) => repo.forkCount * -1]);
-            // takes top 5
+            // takes top 5 repos
             user.repos = _.take(sortedRepos, 5);
 
             console.log(user);

@@ -2,6 +2,8 @@ import * as request from "request";
 import {User} from "../model/User";
 import {Repo} from "../model/Repo";
 
+const GITHUB_API_URL = 'https://api.github.com/users/';
+
 const OPTIONS: any = {
     headers: {
         'User-Agent': 'request'
@@ -12,7 +14,7 @@ const OPTIONS: any = {
 export class GithubApiService {
 
     getUserInfo(userName: string, callBack: (user: User) => any) {
-        request.get('https://api.github.com/users/' + userName,
+        request.get(GITHUB_API_URL + userName,
             OPTIONS,
             (error: any, response: any, body: any) => {
                 // console.log(error);
@@ -25,7 +27,7 @@ export class GithubApiService {
     }
 
     getRepos(userName: string, callBack: (repos: Repo[]) => any) {
-        request.get('https://api.github.com/users/' + userName + '/repos',
+        request.get(GITHUB_API_URL + userName + '/repos',
             OPTIONS,
             (error: any, response: any, body: any) => {
                 // map each object from array as new repo
